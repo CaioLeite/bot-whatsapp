@@ -1,41 +1,3 @@
-/*require('dotenv').config();
-const mongoose = require('mongoose');
-const Contato = require('./models/Contato');
-const { lerPlanilhaContatos } = require('./helpers/lerPlanilha'); 
-
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(async () => {
-  console.log('Conectado ao MongoDB');
-
-  try {
-    const contatos = lerPlanilhaContatos('./contatos.xlsx'); 
-
-    for (const dado of contatos) {
-      const contato = new Contato({
-        numero: dado.numero.toString(),
-        status: 'pendente',
-        respostas: {},
-        perguntaAtual: 0,
-        dataInicio: null,
-        dataFim: null
-      });
-
-      await contato.save();
-      console.log(`Contato ${contato.numero} importado.`);
-    }
-
-    console.log('Todos os contatos foram importados.');
-    process.exit();
-  } catch (erro) {
-    console.error('Erro ao importar contatos:', erro);
-  }
-}).catch(err => {
-  console.error('Erro ao conectar ao MongoDB:', err);
-});
-*/
-
 require('dotenv').config();
 const mongoose = require('mongoose');
 const Contato = require('./models/Contato');
@@ -56,7 +18,7 @@ mongoose.connect(process.env.MONGO_URI, {
         continue;
       }
 
-      const numero = dado.numero.toString().replace(/\D/g, ''); // Remove tudo que não for número
+      const numero = dado.numero.toString().replace(/\D/g, '');
 
       const existe = await Contato.findOne({ numero });
       if (existe) {
@@ -74,14 +36,14 @@ mongoose.connect(process.env.MONGO_URI, {
       });
 
       await contato.save();
-      console.log(`✅ Contato ${numero} importado.`);
+      console.log(`Contato ${numero} importado.`);
     }
 
-    console.log('✅ Todos os contatos foram importados.');
+    console.log('Todos os contatos foram importados.');
     process.exit();
   } catch (erro) {
-    console.error('❌ Erro ao importar contatos:', erro);
+    console.error('Erro ao importar contatos:', erro);
   }
 }).catch(err => {
-  console.error('❌ Erro ao conectar ao MongoDB:', err);
+  console.error('Erro ao conectar ao MongoDB:', err);
 });

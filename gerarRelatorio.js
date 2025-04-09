@@ -31,11 +31,11 @@ mongoose.connect(process.env.MONGO_URI, {
 
     XLSX.writeFile(workbook, 'relatorio_contatos.xlsx');
 
-    console.log('✅ Relatório gerado com sucesso: relatorio_contatos.xlsx');
+    console.log('Relatório gerado com sucesso: relatorio_contatos.xlsx');
     process.exit();
   } catch (erro) {
-    console.error('❌ Erro ao gerar relatório:', erro);
+    console.error(' Erro ao gerar relatório:', erro);
   }
 }).catch(err => {
-  console.error('❌ Erro ao conectar ao MongoDB:', err);
+  console.error('Erro ao conectar ao MongoDB:', err);
 });
